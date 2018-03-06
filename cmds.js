@@ -136,7 +136,7 @@ exports.quitCmd=rl=>{
                         }
            else{
              
-              log(`Su respuesta es incorrecta Aciertos ${colorize(score,'magenta')}`);
+              log(`Su respuesta es incorrecta. Fin del juego. Aciertos ${colorize(score,'magenta')}`);
                rl.prompt();
          }
         
@@ -186,7 +186,7 @@ exports.quitCmd=rl=>{
     
     exports.creditsCmd=rl=>{
     console.log("Autores de la practica:");
-    console.log('nombre 1');
+    console.log('nombre 1: josetomemayo');
     console.log('nombre 2');
     rl.prompt();
 };
