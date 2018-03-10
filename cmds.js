@@ -246,7 +246,7 @@ toBeResolved.splice(idaux,1);
         }
         else{
 
-             log(`Su respuesta es incorrecta Aciertos ${colorize(score,'magenta')}`); 
+             log(`Su respuesta es incorrecta. Fin del juego. Aciertos ${colorize(score,'magenta')}`); 
                rl.prompt();
 }           
           }); 
