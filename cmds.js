@@ -171,14 +171,16 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
         if (quiz.answer===a) {
 
-            log("Correcto");
+            log("Su respuesta es correcta");
+		rl.prompt();
 	
 
 
         }
         else{
 
-            log("incorrecto");}
+            log("Su respuesta es incorrecta");}
+	rl.prompt();
                
         });
 
