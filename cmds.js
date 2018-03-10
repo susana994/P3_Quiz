@@ -109,6 +109,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
             if (typeof id === "undefined"){
                 
                 reject(new Error(`Falta el parametro <id>.`));
+		 rl.prompt();
             }
             else{
 
@@ -116,6 +117,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
                 if(Number.isNaN(id)){
                     reject(new Error(`El valor del parametro <id> no es un número.`));
+			 rl.prompt();
 
                 }
                 else {
