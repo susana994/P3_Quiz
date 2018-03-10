@@ -35,14 +35,8 @@ rl.close();
             rl.question(colorize(text, 'red'), answer =>{
         resolve(answer.trim());
 });
-
-
-
 });
-
 };
-
-
 
     exports.addCmd=rl=>{
 
@@ -84,7 +78,6 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
     .then(()  => {   rl.prompt();
 
 })
-   
     };
 
 
@@ -106,8 +99,6 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
         rl.prompt();
     });
-
-
    };
 
 
@@ -130,16 +121,13 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
                 else {
                     resolve(id);
 
-                
+             
                 }
 
             }
-
-
 })
 
 };
-
 
    exports.showCmd=(rl,id)=>{
 
@@ -173,41 +161,37 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         .then(quiz => {
         if(!quiz){
             throw new Error(`No existe un quiz asociado al id = ${id}.`);
+	rl.prompt();
 
 }
 
     return makeQuestion(rl, `${quiz.question}`)
-
-        
-
-        
-
-        
-        
 
         .then ( a =>{
 
         if (quiz.answer===a) {
 
             log("Correcto");
+	
 
 
         }
         else{
 
             log("incorrecto");}
-            
-        
-        
-
+               
         });
 
 })
 
+    .catch(error => {
+       errorlog(error.message);
+     })	
 
+.then(()  => {   rl.prompt();
 
-
-
+})
+	
     };
    
    exports.playCmd=rl=>{
@@ -225,9 +209,13 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
      } 
        const play = () => { 
        if(contador===0){ 
-         rl.prompt(); 
+         
           
           log(`Fin del juego. Aciertos ${colorize(score,'magenta')}`); 
+
+		  rl.prompt();
+
+
            
      } 
        else{ 
@@ -258,18 +246,11 @@ toBeResolved.splice(idaux,1);
 
              log(`Su respuesta es incorrecta Aciertos ${colorize(score,'magenta')}`); 
                rl.prompt();
-}
-            
+}           
           }); 
-        
-    
-
-
     } )
      
        }; 
-       
-        
 
         };
 
@@ -313,14 +294,10 @@ play();
 
     return makeQuestion(rl, 'Introduzca la respuesta:')
 
-
-
-        .then(a => {
+       .then(a => {
             quiz.question =g;
             quiz.answer=a;
             return quiz;
-
-
 });
 });
 })
