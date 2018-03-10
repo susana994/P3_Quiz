@@ -189,6 +189,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
     .catch(error => {
        errorlog(error.message);
+	rl.prompt();
      })	
 
 .then(()  => {   rl.prompt();
@@ -268,6 +269,7 @@ play();
 
     .catch(error => {
        errorlog(error.message);
+	rl.prompt();
      })
     
     .then(()  => { 
