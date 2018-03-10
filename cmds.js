@@ -162,7 +162,8 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         if(!quiz){
         
            errorlog(`No existe un quiz asociado al id = ${id}.`);
-	rl.prompt();
+	
+	
 
 }
 
@@ -173,15 +174,13 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         if (quiz.answer===a) {
 
             log("Su respuesta es correcta");
-		rl.prompt();
-	
-
+		
 
         }
         else{
 
             log("Su respuesta es incorrecta");}
-	rl.prompt();
+	
                
         });
 
