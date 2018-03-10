@@ -160,7 +160,8 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         .then(id => models.quiz.findById(id))
         .then(quiz => {
         if(!quiz){
-            throw new Error(`No existe un quiz asociado al id = ${id}.`);
+        
+           errorlog(`No existe un quiz asociado al id = ${id}.`);
 	rl.prompt();
 
 }
