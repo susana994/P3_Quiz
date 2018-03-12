@@ -129,7 +129,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
                 }
 
             }
-});
+})
 
 };
 
@@ -144,7 +144,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
         }
 
-        log(`[${colorize(quiz.id, 'magenta')}]: ${quiz.question}${colorize('=>', 'red')}`)
+        log(`[${colorize(quiz.id, 'magenta')}]: ${quiz.question}${colorize('=>', red)}`)
     
     })
      
@@ -178,9 +178,9 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 	
     return makeQuestion(rl, quiz.question)
 
-        .then ( a => {
+        .then ( a =>{
 
-        if (a===quiz.answer) {
+        if (quiz.answer===a) {
 
             console.log("Su respuesta es correcta");
 		return;
@@ -212,22 +212,31 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
     };
    
    	exports.playCmd=rl=>{
-		let score = 0; 
+
+     		let score = 0; 
   		let contador = 4; 
      		let toBeResolved=[]; 
-		for (i=1; i<5; i++){ 
+      
+     		    for (i=1; i<5; i++){ 
         
     			toBeResolved[i-1]=i; 
  
-     		    } 		
- 		const play = () => { 
-		return Promise.resolve()
+     		    } 
+       
+		    const play = () => { 
+
+			return Promise.resolve()
 			.then(() => {
+       
 				if(contador===0){ 
-                 			    log("Fin del juego. "); 
+        
+         			    log(`Fin del juego. Aciertos ${colorize(score,'magenta')}`); 
+
 		  		   return;
+
     				} 
-       				          
+       				else{ 
+          
          			    let idaux= Math.round(Math.random()*(toBeResolved.length -1));
          			    let id= toBeResolved[idaux];
 	
@@ -245,27 +254,26 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         					if (quiz.answer===a) {
 
              						score++; 
-             						log("Su respuesta es correcta.");
-							 log(`Aciertos ${colorize(score,'magenta')}`); 
+             						log(`Su respuesta es correcta. Aciertos ${colorize(score,'magenta')}`); 
                          				return play();
+
         					}
         					else{
 
-             						log("Fin del juego. Su respuesta es incorrecta.");
-							log(`Aciertos ${colorize(score,'magenta')}`);               						return;
+             						log(`Fin del juego. Su respuesta es incorrecta. Aciertos ${colorize(score,'magenta')}`); 
+               						return;
 						}           
           				}); 
     				     })
     
-        
+       };  
 	});
 
-        }
+        };
 models.quiz.findAll({raw: true})
 .then(() => {
 
-return play(); 
-})
+return play(); })
 .catch(error => {
        errorlog(error.message);
 	rl.prompt();
@@ -275,7 +283,8 @@ return play();
     
     rl.prompt();
 
-	})
+})
+
    };
 
 
@@ -318,7 +327,7 @@ return play();
     return makeQuestion(rl, 'Introduzca la respuesta:')
 
        .then(a => {
-            quiz.question =q;
+            quiz.question =g;
             quiz.answer=a;
             return quiz;
 });
