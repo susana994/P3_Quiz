@@ -170,7 +170,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 	.then(quiz => {
         if(!quiz){
         
-           errorlog(`No existe un quiz asociado al id = ${id}.`);	
+            throw new Error(`No existe un quiz asociado al id = ${id}.`);	
 		
 
 	
