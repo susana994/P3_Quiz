@@ -171,9 +171,6 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         if(!quiz){
         
             throw new Error(`No existe un quiz asociado al id = ${id}.`);	
-		
-
-	
 
 }
 
@@ -250,7 +247,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 					toBeResolved.splice(idaux,1);
     					contador --;    
 
-    					return makeQuestion(rl, `${quiz.question}`)
+    					return makeQuestion(rl, quiz.question)
     
         				.then ( a =>{
 
