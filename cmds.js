@@ -253,7 +253,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         					else{
 
              						log(`Fin del juego. Su respuesta es incorrecta. Aciertos ${colorize(score,'magenta')}`); 
-               						rl.prompt();
+               						return;
 						}           
           				}); 
     				     })
@@ -263,7 +263,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
         };
 
-play();
+return play();
 
    };
    exports.deleteCmd=(rl,id)=>{
