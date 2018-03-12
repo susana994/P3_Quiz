@@ -245,13 +245,13 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         					if (quiz.answer===a) {
 
              						score++; 
-             						log("Su respuesta es correcta.")
+             						log("Su respuesta es correcta.");
 							 log(`Aciertos ${colorize(score,'magenta')}`); 
                          				return play();
         					}
         					else{
 
-             						log("Fin del juego. Su respuesta es incorrecta."
+             						log("Fin del juego. Su respuesta es incorrecta.");
 							log(`Aciertos ${colorize(score,'magenta')}`);               						return;
 						}           
           				}); 
