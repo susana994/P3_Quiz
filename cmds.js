@@ -109,7 +109,8 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
             if (typeof id === "undefined"){
                 
                 reject(new Error(`Falta el parametro <id>.`));
-		 rl.prompt();
+	return 1;
+		
             }
             else{
 
@@ -117,11 +118,13 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
                 if(Number.isNaN(id)){
                     reject(new Error(`El valor del parametro <id> no es un número.`));
-			 rl.prompt();
+		return 1;
+			 
 
                 }
                 else {
                     resolve(id);
+		return 0;
 
              
                 }
@@ -157,8 +160,9 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
    
     exports.testCmd=(rl,id)=>{
       
-
-        validateId(id)
+	
+       validateId(id)
+	
         .then(id => models.quiz.findById(id))
         .then(quiz => {
         if(!quiz){
@@ -199,63 +203,63 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 	
     };
    
-   exports.playCmd=rl=>{
+   	exports.playCmd=rl=>{
 
-     let score = 0; 
+     		let score = 0; 
+  		let contador = 4; 
+     		let toBeResolved=[]; 
       
-     let contador = 4; 
-      
-     let toBeResolved=[]; 
-      
-     for (i=1; i<5; i++){ 
+     		    for (i=1; i<5; i++){ 
         
-    toBeResolved[i-1]=i; 
+    			toBeResolved[i-1]=i; 
  
-     } 
-       const play = () => { 
-       if(contador===0){ 
-         
+     		    } 
+       
+		    const play = () => { 
+
+			return Promise.resolve()
+			.then(() => {
+       
+				if(contador===0){ 
+        
+         			    log(`Fin del juego. Aciertos ${colorize(score,'magenta')}`); 
+
+		  		    rl.prompt();
+
+    				} 
+       				else{ 
           
-          log(`Fin del juego. Aciertos ${colorize(score,'magenta')}`); 
-
-		  rl.prompt();
-
-
-           
-     } 
-       else{ 
-          
-         let idaux= Math.round(Math.random()*(toBeResolved.length -1));
-
-         let id= toBeResolved[idaux];
+         			    let idaux= Math.round(Math.random()*(toBeResolved.length -1));
+         			    let id= toBeResolved[idaux];
 	
-         validateId(id)
-        .then(id => models.quiz.findById(id))
-        .then(quiz => {
-toBeResolved.splice(idaux,1);
-    contador --;    
+         			    validateId(id)
+       				    .then(id => models.quiz.findById(id))
+        		            .then(quiz => {
 
-    return makeQuestion(rl, `${quiz.question}`)
+					toBeResolved.splice(idaux,1);
+    					contador --;    
+
+    					return makeQuestion(rl, `${quiz.question}`)
     
-        .then ( a =>{
+        				.then ( a =>{
 
-        if (quiz.answer===a) {
+        					if (quiz.answer===a) {
 
-             score++; 
-             log(`Su respuesta es correcta Aciertos ${colorize(score,'magenta')}`); 
-              
-             play();
+             						score++; 
+             						log(`Su respuesta es correcta. Aciertos ${colorize(score,'magenta')}`); 
+                         				play();
 
-        }
-        else{
+        					}
+        					else{
 
-             log(`Su respuesta es incorrecta. Fin del juego. Aciertos ${colorize(score,'magenta')}`); 
-               rl.prompt();
-}           
-          }); 
-    } )
-     
-       }; 
+             						log(`Fin del juego. Su respuesta es incorrecta. Aciertos ${colorize(score,'magenta')}`); 
+               						rl.prompt();
+						}           
+          				}); 
+    				     })
+    
+       };  
+	});
 
         };
 
