@@ -164,13 +164,14 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
        validateId(id)
 	
         .then(id => models.quiz.findById(id))
+
         
 	
 	.then(quiz => {
         if(!quiz){
         
            errorlog(`No existe un quiz asociado al id = ${id}.`);	
-		return;
+		
 
 	
 
@@ -178,7 +179,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
 	
 	
-    return makeQuestion(rl, `${quiz.question}`)
+    return makeQuestion(rl, quiz.question)
 
         .then ( a =>{
 
