@@ -167,7 +167,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         .then(quiz => {
         if(!quiz){
         
-           errorlog(`No existe un quiz asociado al id = ${id}.`);
+           errorlog(`No existe un quiz asociado al id = ${id}.`);	
 	
 	
 
@@ -180,12 +180,14 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         if (quiz.answer===a) {
 
             console.log("Su respuesta es correcta");
+		return;
 		
 
         }
         else{
 
             console.log("Su respuesta es incorrecta");}
+		return;
 	
                
         });
