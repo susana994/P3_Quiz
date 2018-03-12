@@ -129,7 +129,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
                 }
 
             }
-})
+});
 
 };
 
@@ -212,78 +212,46 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
     };
    
    	exports.playCmd=rl=>{
+		let score = 0;
+	let toBePlayed = [];
 
-     		let score = 0; 
-  		let contador = 4; 
-     		let toBeResolved=[]; 
-      
-     		    for (i=1; i<5; i++){ 
-        
-    			toBeResolved[i-1]=i; 
- 
-     		    } 
-       
-		    const play = () => { 
+	const playOne = () => {
 
-			return Promise.resolve()
-			.then(() => {
-       
-				if(contador===0){ 
-        
-         			    log(`Fin del juego. Aciertos ${colorize(score,'magenta')}`); 
+		return Promise.resolve()
+		.then (() => {
+			if (toBePlayed.length <= 0) {
+				console.log("SACABO");
+				return;
+			}
+			let pos = Math.floor(Math.random() * toBePlayed.lenght);
+			let quiz = toBePlayed[pos];
+			toBePlayed.splice(pos, 1);
 
-		  		   return;
+			return makeQuestion(rl, quiz.question)
+			.then(a => {
+				if(a.toLowerCase().trim() === quiz.answer.toLowerCase().trim()) {
+					score++;
+					console.log("animo");
+					return playOne();
+				} else {
+					console.log("kkk");
+				}
+			})
+		})
+	}
 
-    				} 
-       				else{ 
-          
-         			    let idaux= Math.round(Math.random()*(toBeResolved.length -1));
-         			    let id= toBeResolved[idaux];
+	models.quiz.findAll({raw: true})
 	
-         			    validateId(id)
-       				    .then(id => models.quiz.findById(id))
-        		            .then(quiz => {
-
-					toBeResolved.splice(idaux,1);
-    					contador --;    
-
-    					return makeQuestion(rl, quiz.question)
-    
-        				.then ( a =>{
-
-        					if (quiz.answer===a) {
-
-             						score++; 
-             						log(`Su respuesta es correcta. Aciertos ${colorize(score,'magenta')}`); 
-                         				return play();
-
-        					}
-        					else{
-
-             						log(`Fin del juego. Su respuesta es incorrecta. Aciertos ${colorize(score,'magenta')}`); 
-               						return;
-						}           
-          				}); 
-    				     })
-    
-       };  
-	});
-
-        };
-models.quiz.findAll({raw: true})
-.then(() => {
-
-return play(); })
-.catch(error => {
-       errorlog(error.message);
-	rl.prompt();
-     })
-    
-    .then(()  => { 
-    
-    rl.prompt();
-
-})
+	.then(() => {
+		return playOne();
+	})
+	.catch(e => {
+		console.log("error: " + e);
+	})
+	.then(() => {
+		console.log(score);
+		rl.prompt();
+	})
 
    };
 
