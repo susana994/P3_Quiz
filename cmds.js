@@ -179,13 +179,13 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
         if (quiz.answer===a) {
 
-            log("Su respuesta es correcta");
+            console.log("Su respuesta es correcta");
 		
 
         }
         else{
 
-            log("Su respuesta es incorrecta");}
+            console.log("Su respuesta es incorrecta");}
 	
                
         });
