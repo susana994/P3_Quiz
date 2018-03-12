@@ -266,6 +266,16 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         };
 
 return play();
+.catch(error => {
+       errorlog(error.message);
+	rl.prompt();
+     })
+    
+    .then(()  => { 
+    
+    rl.prompt();
+
+})
 
    };
    exports.deleteCmd=(rl,id)=>{
