@@ -272,10 +272,20 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 	});
 
         };
+models.quiz.findAll({raw: true})
+.then(() => {
 
+return play(); })
+.catch(error => {
+       errorlog(error.message);
+	rl.prompt();
+     })
+    
+    .then(()  => { 
+    
+    rl.prompt();
 
-
-return play();
+})
 
    };
 
