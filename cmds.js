@@ -109,7 +109,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
             if (typeof id === "undefined"){
                 
                 reject(new Error(`Falta el parametro <id>.`));
-	return 1;
+	
 		
             }
             else{
@@ -118,13 +118,12 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
                 if(Number.isNaN(id)){
                     reject(new Error(`El valor del parametro <id> no es un número.`));
-		return 1;
-			 
+		
 
                 }
                 else {
                     resolve(id);
-		return 0;
+		
 
              
                 }
@@ -161,18 +160,24 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
     exports.testCmd=(rl,id)=>{
       
 	
+	
        validateId(id)
 	
         .then(id => models.quiz.findById(id))
-        .then(quiz => {
+        
+	
+	.then(quiz => {
         if(!quiz){
         
            errorlog(`No existe un quiz asociado al id = ${id}.`);	
-	
+		return;
+
 	
 
 }
 
+	
+	
     return makeQuestion(rl, `${quiz.question}`)
 
         .then ( a =>{
@@ -186,13 +191,16 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         }
         else{
 
-            console.log("Su respuesta es incorrecta");}
+            console.log("Su respuesta es incorrecta");
 		return;
+		}
+		
 	
                
         });
 
 })
+
 
     .catch(error => {
        errorlog(error.message);
