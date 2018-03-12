@@ -8,7 +8,7 @@ biglog('CORE Quiz', 'green');
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-  prompt: colorize("quiz> ", 'blue' ),
+  prompt: colorize("quiz > ", 'blue' ),
   completer : (line) =>{
     const completions = 'h help add delete edit list test p play credits q quit'.split(' ');
     const hits = completions.filter((c) => c.startsWith(line));
@@ -32,6 +32,7 @@ rl.on('line',(line) => {
   switch (cmd) {
 
   case '':
+	rl.prompt();
   break;
 
   case 'h':
@@ -79,13 +80,13 @@ rl.on('line',(line) => {
   
   case 'credits':
    
-   console.log("Nombre 1:");
-   console.log("Nombre 2: ");
+   
     cmds.creditsCmd(rl);
   break;
     default:
-      console.log(`Comando desconocido: '${colorize(cmd, 'red')}'`);
-       console.log(`use'${colorize('help','green')}' para ver todos los comandos`);
+     console.log(`Say what? I might have heard '${colorize(cmd,'red')}'`);
+    console.log(`use'${colorize('help','green')}' para ver todos los comandos`);
+rl.prompt();
 break;
   
   }
