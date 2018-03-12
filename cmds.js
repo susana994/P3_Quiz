@@ -224,7 +224,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
         
          			    log(`Fin del juego. Aciertos ${colorize(score,'magenta')}`); 
 
-		  		    rl.prompt();
+		  		   return;
 
     				} 
        				else{ 
@@ -247,7 +247,7 @@ log(`${colorize('Se ha añadido','magenta')}: ${quiz.question} ${colorize('=>','
 
              						score++; 
              						log(`Su respuesta es correcta. Aciertos ${colorize(score,'magenta')}`); 
-                         				play();
+                         				return play();
 
         					}
         					else{
